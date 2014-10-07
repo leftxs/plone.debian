@@ -19,8 +19,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     poppler-utils \
     wv \
     locales \
-    python-pip \
-    supervisor
+    python-pip
 
 RUN pip install zc.buildout
 
