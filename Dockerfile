@@ -30,6 +30,10 @@ RUN dpkg-reconfigure locales && \
 
 ENV LC_ALL C.UTF-8
 
+# Clean up APT when done.
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 ENV DEBIAN_FRONTEND newt
 
 RUN useradd zope -d /usr/local/zope -s /bin/bash && \
