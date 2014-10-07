@@ -1,29 +1,50 @@
-FROM ubuntu:12.04
+FROM debian:jessie
 MAINTAINER Sven Strack
 
-RUN apt-get update
-RUN apt-get install -y supervisor build-essential wget libssl-dev libxml2-dev libxslt1-dev libbz2-dev zlib1g-dev python-setuptools python-dev libjpeg62-dev libreadline-dev python-imaging wv poppler-utils
+ENV DEBIAN_FRONTEND noninteractive
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    wget \
+    libssl-dev \
+    libxml2-dev \
+    libxslt1-dev \
+    libbz2-dev \
+    zlib1g-dev \
+    python-setuptools \
+    python-dev \
+    libjpeg62-dev \
+    libreadline-dev \
+    python-imaging \
+    poppler-utils \
+    wv \
+    locales \
+    python-pip \
+    supervisor
 
-RUN useradd plone -d /usr/local/Zeo -s /bin/bash
-RUN mkdir -p /usr/local/Zeo/
-RUN chown -R plone:plone /usr/local/Zeo
+RUN pip install zc.buildout
 
-# fetch unified installer
-USER plone
-RUN cd /tmp && wget --no-check-certificate https://launchpad.net/plone/4.3/4.3.2/+download/Plone-4.3.2-UnifiedInstaller.tgz
-RUN tar -xzf /tmp/Plone-4.3.2-UnifiedInstaller.tgz -C /tmp
+RUN dpkg-reconfigure locales && \
+    locale-gen C.UTF-8 && \
+    /usr/sbin/update-locale LANG=C.UTF-8
 
+ENV LC_ALL C.UTF-8
 
-RUN cd /tmp/Plone-4.3.2-UnifiedInstaller; ./install.sh --password=plone standalone --target=/usr/local/Zeo/
+ENV DEBIAN_FRONTEND newt
 
-# If you do not want supervisor and and want to see all in fg-mode
-#USER plone
-#CMD /usr/local/Zeo/zinstance/bin/plonectl fg
+RUN useradd zope -d /usr/local/zope -s /bin/bash && \
+    mkdir -p /usr/local/zope && \
+    chown -R zope:zope /usr/local/zope && \
+    mkdir -p /data && \
+    chown -R zope:zope /data
 
-USER root
-ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-CMD ["/usr/bin/supervisord"]
+USER zope
+WORKDIR /usr/local/zope
+VOLUME /site
+ADD buildout.cfg /usr/local/zope/
+RUN buildout
+CMD bin/instance console
 
 
 EXPOSE 8080
+
