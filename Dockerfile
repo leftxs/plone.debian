@@ -40,7 +40,6 @@ RUN useradd zope -d /usr/local/zope -s /bin/bash && \
 
 USER zope
 WORKDIR /usr/local/zope
-VOLUME /site
 ADD buildout.cfg /usr/local/zope/
 RUN buildout
 CMD bin/instance console
