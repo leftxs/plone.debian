@@ -21,15 +21,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     locales \
     python-pip
 
-RUN pip install zc.buildout
-
-RUN dpkg-reconfigure locales && \
+RUN pip install zc.buildout && \
+    dpkg-reconfigure locales && \
     locale-gen C.UTF-8 && \
     /usr/sbin/update-locale LANG=C.UTF-8
 
 ENV LC_ALL C.UTF-8
 
-# Clean up APT when done.
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -44,7 +42,8 @@ RUN useradd zope -d /usr/local/zope -s /bin/bash && \
 USER zope
 WORKDIR /usr/local/zope
 ADD buildout.cfg /usr/local/zope/
-RUN buildout
+RUN buildout && \
+    rm buildout.cfg
 CMD bin/instance console
 
 
