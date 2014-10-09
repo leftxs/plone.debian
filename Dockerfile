@@ -1,5 +1,5 @@
 FROM debian:jessie
-MAINTAINER Sven Strack
+MAINTAINER Sven Strack <sven@so36.net>
 
 ENV DEBIAN_FRONTEND noninteractive
 
