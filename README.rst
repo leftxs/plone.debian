@@ -11,7 +11,7 @@ Example
 
     git clone https://github.com/leftxs/plone.docker.git
 
-    docker built -t plone-docker .
+    docker build -t plone-docker .
 
     docker run -d --name plone-test -p 8080:8080 plone-docker
 
@@ -32,7 +32,7 @@ dir exists and check the permissions, you will need read+write....
 
 .. code-block:: bash
 
-    docker run --name plone1 -d-v /home/svx/Projects/docker/plone.host.data/site-data:/data -p 8080:8080 debian-plone
+    docker run --name plone1 -d-v /home/svx/Projects/docker/plone.host.data/site-data:/data -p 8080:8080 plone-docker
 
 this will mount /home/svx/Projects/docker/plone.host.data/site-data from our
 host into /data from our container.
