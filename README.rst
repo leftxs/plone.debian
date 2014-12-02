@@ -30,6 +30,15 @@ Persistent data
 Do keep data, mount a directory from your host, make sure that this
 dir exists and check the permissions, you will need read+write....
 
+Make sure to create the dirs and subdirs, like
+
+.. code-block:: bash
+
+    mkdir site-data
+    mkdir sire-data/log
+
+Run docker
+
 .. code-block:: bash
 
     docker run --name plone1 -d-v /home/svx/Projects/docker/plone.host.data/site-data:/data -p 8080:8080 plone-docker
