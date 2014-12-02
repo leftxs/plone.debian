@@ -35,7 +35,7 @@ Make sure to create the dirs and subdirs, like
 .. code-block:: bash
 
     mkdir site-data
-    mkdir sire-data/log
+    mkdir site-data/log
 
 Run docker
 
