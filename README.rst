@@ -1,4 +1,4 @@
-plone.docker
+plone.debian
 ============
 
 This is an example for running one basic plone instance inside `docker container <http://docker.io>`_.
@@ -9,11 +9,11 @@ Example
 
 .. code-block:: bash
 
-    git clone https://github.com/leftxs/plone.docker.git
+    git clone https://github.com/leftxs/plone.debian.git
 
-    docker build -t plone-docker .
+    docker build -t plone.debian .
 
-    docker run -d --name plone-test -p 8080:8080 plone-docker
+    docker run -d --name plone-test -p 8080:8080 plone.debian
 
 .. todo:: make this a trusted build and push it to docker hub
 
@@ -41,7 +41,7 @@ Run docker
 
 .. code-block:: bash
 
-    docker run --name plone1 -d-v /home/svx/Projects/docker/plone.host.data/data:/data -v /home/svx/Projects/docker/plone.host.data/data/logs:/data/logs -p 8080:8080 debian-plone
+    docker run --name plone1 -d-v /home/svx/Projects/docker/plone.host.data/data:/data -v /home/svx/Projects/docker/plone.host.data/data/logs:/data/logs -p 8080:8080 plone.debian
 
 this will mount /data from our container to /home/svx/Projects/docker/plone.host.data/data on our host.
 
