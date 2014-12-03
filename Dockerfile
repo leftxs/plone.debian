@@ -46,6 +46,7 @@ RUN buildout && \
     rm buildout.cfg
 CMD bin/instance console
 
+VOLUME ["/data", "/data/log"]
 
 EXPOSE 8080
 
