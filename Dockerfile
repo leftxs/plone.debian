@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     zlib1g-dev \
     python-setuptools \
     python-dev \
-    libjpeg62-dev \
+    libjpeg62-turbo-dev \
     libreadline-dev \
     python-imaging \
     poppler-utils \
