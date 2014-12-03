@@ -32,10 +32,10 @@ dir exists and check the permissions, you will need read+write....
 
 .. code-block:: bash
 
-    docker run --name plone1 -d-v /home/svx/Projects/docker/plone.host.data/site-data:/data -p 8080:8080 debian-plone
+    docker run --name plone1 -d-v /home/svx/Projects/docker/plone.host.data/data:/data -v /home/svx/Projects/docker/plone.host.data/data/logs:/data/logs -p 8080:8080 debian-plone
 
-this will mount /home/svx/Projects/docker/plone.host.data/site-data from our
-host into /data from our container.
+this will mount /data from our container to /home/svx/Projects/docker/plone.host.data/data on our host.
+
 
 You are now able to check all your files in /home/svx/Projects/docker/plone.host.data/site-data
 
